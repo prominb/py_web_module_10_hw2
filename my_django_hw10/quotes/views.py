@@ -16,7 +16,7 @@ def main(request, page=1):
     per_page = 10
     paginator = Paginator(list(quotes), per_page)
     quotes_on_page = paginator.page(page)
-    return render(request, 'quotes/index.html', {'quotes': quotes_on_page})
+    return render(request, 'quotes/index1.html', {'quotes': quotes_on_page})
 
 
 # def index(request):

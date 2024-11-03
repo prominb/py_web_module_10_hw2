@@ -7,8 +7,6 @@ from pymongo import MongoClient
 load_dotenv()
 ATLAS_URI = os.getenv("ATLAS_URI")
 MONGODB_DB_NAME = os.getenv("DB_NAME")
-# print(type(MONGODB_DB_NAME))
-# print(MONGODB_DB_NAME)
 
 
 def get_mongodb():

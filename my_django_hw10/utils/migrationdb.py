@@ -9,9 +9,9 @@ django.setup()
 
 from quotes.models import Author, Tag, Quote  # noqa
 
-# client = MongoClient("mongodb+srv://")
-client = MongoClient(ATLAS_URI)  # noqa
-db = client.MONGODB_DB_NAME
+client = MongoClient("mongodb+srv://")
+# client = MongoClient(ATLAS_URI)  # noqa
+# db = client.MONGODB_DB_NAME
 
 authors = db.authors.find()
 
