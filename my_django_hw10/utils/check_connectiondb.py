@@ -16,10 +16,12 @@ absolute_path = relative_path.absolute()
 path_to_env = absolute_path.parent / ".env"
 # print(path_to_env)
 print("DOT_ENV file Exists? ->", path_to_env.exists())
-if path_to_env:
+if path_to_env.exists():
     config = dotenv_values(path_to_env)
     # print(type(config))
     # print(config["ATLAS_URI"])
     mongodb_client = MongoClient(config["ATLAS_URI"])
     database = mongodb_client[config["DB_NAME"]]
     print("Connected to the MongoDB database!")
+else:
+    print("Connection not Established!")
