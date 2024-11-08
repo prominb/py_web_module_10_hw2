@@ -10,6 +10,7 @@ from pymongo import MongoClient
 relative_path = Path().cwd()
 # print(relative_path)
 absolute_path = relative_path.absolute()
+# print(absolute_path)
 # print(absolute_path.parent)
 # print(absolute_path.parent.parent.parent)
 # path_to_env = absolute_path.parent.parent.parent / ".env"
