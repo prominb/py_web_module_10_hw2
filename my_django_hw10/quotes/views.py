@@ -4,8 +4,8 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 
 from .utils import get_mongodb
-from .models import Quote
-from .forms import TagForm
+from .models import Tag, Quote
+from .forms import TagForm, QuoteForm
 
 # Create your views here.
 def main(request, page=1):
@@ -30,6 +30,26 @@ def tag(request):
             return render(request, 'quotes/tag.html', {'form': form})
 
     return render(request, 'quotes/tag.html', {'form': TagForm()})
+
+def note(request):
+    tags = Tag.objects.all()
+
+    if request.method == 'POST':
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            new_note = form.save()
+
+            choice_tags = Tag.objects.filter(name__in=request.POST.getlist('tags'))
+            for tag in choice_tags.iterator():
+                new_note.tags.add(tag)
+
+            return redirect(to='quotes:main')
+        else:
+            return render(request, 'quotes/add_quote.html', {"tags": tags, 'form': form})
+
+    return render(request, 'quotes/add_quote.html', {"tags": tags, 'form': QuoteForm()})
+
+
 
 
 
