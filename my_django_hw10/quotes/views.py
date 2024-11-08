@@ -31,17 +31,17 @@ def tag(request):
 
     return render(request, 'quotes/tag.html', {'form': TagForm()})
 
-def note(request):
+def add_quote(request):
     tags = Tag.objects.all()
 
     if request.method == 'POST':
         form = QuoteForm(request.POST)
         if form.is_valid():
-            new_note = form.save()
+            new_quote = form.save()
 
             choice_tags = Tag.objects.filter(name__in=request.POST.getlist('tags'))
             for tag in choice_tags.iterator():
-                new_note.tags.add(tag)
+                new_quote.tags.add(tag)
 
             return redirect(to='quotes:main')
         else:

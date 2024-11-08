@@ -7,6 +7,7 @@ app_name = 'quotes'
 urlpatterns = [
     path('', views.main, name='main'),  # AAAAA
     # path('<int:page>', views.main, name='main_paginate'),  # AAAAA
+    path('add_quote/', views.add_quote, name='add_quote'),
     path('tag/', views.tag, name='tag'),
     # path('note/', views.note, name='note'),
     # path('detail/<int:note_id>/', views.detail, name='detail'),
