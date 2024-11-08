@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 
 from django.http import HttpResponse
 
 from .utils import get_mongodb
 from .models import Quote
+from .forms import TagForm
 
 # Create your views here.
 def main(request, page=1):
@@ -18,6 +19,18 @@ def main(request, page=1):
 #     quotes_on_page = paginator.page(page)
 #     return render(request, 'quotes/index.html', {'quotes': quotes_on_page})
     return render(request, 'quotes/index01.html')
+
+def tag(request):
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(to='quotes:main')
+        else:
+            return render(request, 'quotes/tag.html', {'form': form})
+
+    return render(request, 'quotes/tag.html', {'form': TagForm()})
+
 
 
 # def index(request):
